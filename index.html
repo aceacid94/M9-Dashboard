@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Go PayTV Status</title>
+
+<style>
+html, body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 12px;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 10px auto;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.row.top .section { flex: 1; }
+
+.section {
+    background: #1e293b;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.bug-fix { flex: 2; }
+.bug-raised { flex: 1; }
+.bug-breakdown { flex: 1; }
+
+/* ✅ HEADER RESTORED */
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.header p {
+    margin: 2px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* ✅ section header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ✅ FIX TABLE ALIGNMENT */
+th, td {
+    text-align: left;   /* ✅ FIXED */
+    padding: 6px;
+}
+
+th {
+    color: #94a3b8;
+}
+
+/* ✅ SMALL DROPDOWN */
+.dropdown {
+    background: #0f172a;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 10px;
+    height: 22px;
+}
+
+/* table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border-top: 1px solid #334155;
+}
+
+/* colors */
+.warn { color: #facc15; }
+.good { color: #22c55e; }
+.bad { color: #ef4444; }
+
+/* ✅ PROGRESS BAR BACK */
+.progress {
+    background: #334155;
+    height: 6px;
+    border-radius: 6px;
+    margin-top: 3px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #22c55e;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ✅ HEADER FIX -->
+<div class="header">
+    <h1>Astro Go PayTV Small Screen Status</h1>
+    <p>Timeline: </p>
+    <p>Environment: Beta-Production</p>
+</div>
+
+<!-- TOP -->
+<div class="row top">
+
+<!-- OVERALL -->
+<div class="section">
+<h3>Overall M9 Release Note Status</h3>
+<table>
+<tr>
+<th>Platform</th><th>Delivered</th><th>Validated</th><th>Blocked</th><th>NA</th><th>%</th>
+</tr>
+<tbody id="overallTable"></tbody>
+</table>
+</div>
+
+<!-- M9 -->
+<div class="section">
+<h3>Total M9 Feature Delivered</h3>
+<table>
+<tr>
+<th>Platform</th><th>Delivered</th><th>Validated</th><th>Blocked</th><th>%</th>
+</tr>
+<tbody id="m8Table"></tbody>
+</table>
+</div>
+
+<!-- M7 -->
+<div class="section">
+<h3>Total M0-M8 Feature Delivered</h3>
+<table>
+<tr>
+<th>Platform</th><th>Delivered</th><th>Validated</th><th>Blocked</th><th>%</th>
+</tr>
+<tbody id="m8Table2"></tbody>
+</table>
+</div>
+
+</div>
+
+<!-- BOTTOM -->
+<div class="row">
+
+<!-- BUG FIX -->
+<div class="section bug-fix">
+<h3>Bug Fixes Status</h3>
+<table>
+<tr>
+<th>Platform</th><th>Delivered</th><th>Resolved[IN PROGRESS]</th><th>Done</th><th>Reopened</th><th>%</th>
+</tr>
+<tbody id="bugFixTable"></tbody>
+</table>
+</div>
+
+<!-- BUG RAISED -->
+<div class="section bug-raised">
+<div class="section-header">
+<h3>New Bugs Raised</h3>
+
+<select class="dropdown" onchange="handleMenu(this)">
+<option value="">JIRA</option>
+<option value="jira">Total M9 JIRA Raised Dashboard</option>
+</select>
+</div>
+
+<table>
+<tr><th>Platform</th><th>L1</th></tr>
+<tbody id="bugRaisedTable"></tbody>
+</table>
+</div>
+
+<!-- BREAKDOWN -->
+<div class="section bug-breakdown">
+<h3>Bug Raised Breakdown</h3>
+<table>
+<tr><th>Category</th><th>Total</th></tr>
+<tbody id="bugBreakdownTable"></tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* OVERALL + PROGRESS */
+const overall = [
+ {n:"Web",d:0,v:0,b:0,na:0},
+ {n:"Android",d:0,v:0,b:0,na:0},
+ {n:"iOS",d:0,v:0,b:0,na:0},
+];
+
+document.getElementById("overallTable").innerHTML =
+overall.map(p=>{
+ let pct=(p.v/p.d*100).toFixed(1);
+ return `<tr>
+ <td>${p.n}</td><td>${p.d}</td><td class="warn">${p.v}</td><td>${p.b}</td><td>${p.na}</td>
+ <td>
+ ${pct}%
+ <div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>
+ </td></tr>`;
+}).join("");
+
+/* M9 + PROGRESS */
+const m8 = [
+ {n:"web",d:0,v:0,b:0},
+ {n:"Android",d:0,v:0,b:0},
+ {n:"iOS",d:0,v:0,b:0}
+];
+
+/* M8 + PROGRESS */
+const m7 = [
+ {n:"web",d:0,v:0,b:0},
+ {n:"Android",d:0,v:0,b:0},
+ {n:"iOS",d:0,v:0,b:0}
+]
+  
+/* M9 PROGRESS */
+document.getElementById("m8Table").innerHTML =
+m8.map(p=>{
+ let pct=(p.v/p.d*100).toFixed(1);
+ return `<tr>
+ <td>${p.n}</td><td>${p.d}</td><td class="good">${p.v}</td><td>${p.b}</td>
+ <td>${pct}%<div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div></td>
+ </tr>`;
+}).join("");
+
+/* M8 PROGRESS */
+document.getElementById("m8Table2").innerHTML =
+m7.map(p=>{
+ let pct=(p.v/p.d*100).toFixed(1);
+ return `<tr>
+ <td>${p.n}</td><td>${p.d}</td><td class="good">${p.v}</td><td>${p.b}</td>
+ <td>${pct}%<div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div></td>
+ </tr>`;
+}).join("");
+
+/* BUG RAISED */
+const br=[0,0,0,0];
+const names=["Web","Android","iOS"];
+let total=0, html="";
+
+for(let i=0;i<br.length;i++){
+ total+=br[i];
+ html+=`<tr><td>${names[i]}</td><td class="warn">${br[i]}</td></tr>`;
+}
+html+=`<tr><td><b>Total</b></td><td class="good"><b>${total}</b></td></tr>`;
+document.getElementById("bugRaisedTable").innerHTML=html;
+
+/* BUG FIX + PROGRESS */
+const bf=[
+ {n:"Web",d:0,res:0,done:0,r:0},
+ {n:"Android",d:0,res:0,done:0,r:0},
+ {n:"iOS",d:0,res:0,done:0,r:0}
+];
+
+document.getElementById("bugFixTable").innerHTML =
+bf.map(p=>{
+ let pct=(p.done/p.d*100).toFixed(1);
+ return `<tr>
+ <td>${p.n}</td><td>${p.d}</td><td>${p.res}</td><td>${p.done}</td><td>${p.r}</td>
+ <td>${pct}%<div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div></td>
+ </tr>`;
+}).join("");
+
+/* BUG BREAKDOWN + TOTAL SUM */
+const breakdown = [
+ {c:"Component Functionality",t:0,cl:"bad"},
+ {c:"UI/UX",t:0,cl:"warn"},
+ {c:"SSAI",t:0,cl:""}
+];
+
+let breakdownTotal = 0;
+let breakdownHtml = "";
+
+for(let i=0;i<breakdown.length;i++){
+ breakdownTotal += breakdown[i].t;
+ breakdownHtml += `<tr><td>${breakdown[i].c}</td><td class="${breakdown[i].cl}">${breakdown[i].t}</td></tr>`;
+}
+
+breakdownHtml += `<tr><td><b>Total</b></td><td class="good"><b>${breakdownTotal}</b></td></tr>`;
+document.getElementById("bugBreakdownTable").innerHTML = breakdownHtml;
+
+/* DROPDOWN */
+function handleMenu(select){
+ if(select.value==="jira"){
+  window.open("https://astrogo.atlassian.net/issues/?jql=filter+%3D+%22ALTV+M8+BUG%22","_blank");
+ }
+ select.value="";
+}
+
+</script>
+
+</body>
+</html>
