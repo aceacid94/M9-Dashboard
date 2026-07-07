@@ -212,9 +212,9 @@ td {
 
 /* OVERALL + PROGRESS */
 const overall = [
- {n:"Web",d:53,v:0,b:0,na:0},
- {n:"Android",d:56,v:0,b:0,na:0},
- {n:"iOS",d:56,v:0,b:0,na:0},
+ {n:"Web",d:53,v:3,b:0,na:0},
+ {n:"Android",d:56,v:2,b:0,na:0},
+ {n:"iOS",d:56,v:2,b:0,na:0},
 ];
 
 document.getElementById("overallTable").innerHTML =
@@ -230,9 +230,9 @@ overall.map(p=>{
 
 /* M9 + PROGRESS */
 const m8 = [
- {n:"web",d:48,v:0,b:0},
- {n:"Android",d:51,v:0,b:0},
- {n:"iOS",d:51,v:0,b:0}
+ {n:"web",d:48,v:3,b:0},
+ {n:"Android",d:51,v:2,b:0},
+ {n:"iOS",d:51,v:2,b:0}
 ];
 
 /* M8 + PROGRESS */
@@ -263,7 +263,7 @@ m7.map(p=>{
 }).join("");
 
 /* BUG RAISED */
-const br=[0,0,0,0];
+const br=[6,3,4];
 const names=["Web","Android","iOS"];
 let total=0, html="";
 
@@ -276,9 +276,9 @@ document.getElementById("bugRaisedTable").innerHTML=html;
 
 /* BUG FIX + PROGRESS */
 const bf=[
- {n:"Web",d:0,res:0,done:0,r:0},
- {n:"Android",d:0,res:0,done:0,r:0},
- {n:"iOS",d:0,res:0,done:0,r:0}
+ {n:"Web",d:38,res:0,done:0,r:0},
+ {n:"Android",d:29,res:0,done:0,r:0},
+ {n:"iOS",d:19,res:0,done:0,r:0}
 ];
 
 document.getElementById("bugFixTable").innerHTML =
@@ -292,9 +292,9 @@ bf.map(p=>{
 
 /* BUG BREAKDOWN + TOTAL SUM */
 const breakdown = [
- {c:"Component Functionality",t:0,cl:"bad"},
- {c:"UI/UX",t:0,cl:"warn"},
- {c:"SSAI",t:0,cl:""}
+ {c:"Component Functionality",t:10,cl:"bad"},
+ {c:"UI/UX",t:3,cl:"warn"},
+ {c:"CDVR",t:1,cl:""}
 ];
 
 let breakdownTotal = 0;
