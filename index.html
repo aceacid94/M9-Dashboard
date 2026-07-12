@@ -212,9 +212,9 @@ td {
 
 /* OVERALL + PROGRESS */
 const overall = [
- {n:"Web",d:53,v:7,b:0,na:0},
- {n:"Android",d:56,v:8,b:0,na:0},
- {n:"iOS",d:56,v:10,b:0,na:0},
+ {n:"Web",d:53,v:18,b:0,na:12},
+ {n:"Android",d:56,v:20,b:3,na:13},
+ {n:"iOS",d:56,v:21,b:3,na:13},
 ];
 
 document.getElementById("overallTable").innerHTML =
@@ -230,9 +230,9 @@ overall.map(p=>{
 
 /* M9 + PROGRESS */
 const m8 = [
- {n:"web",d:48,v:7,b:0},
- {n:"Android",d:51,v:8,b:0},
- {n:"iOS",d:51,v:10,b:0}
+ {n:"web",d:48,v:18,b:0},
+ {n:"Android",d:51,v:20,b:0},
+ {n:"iOS",d:51,v:21,b:0}
 ];
 
 /* M8 + PROGRESS */
@@ -263,7 +263,7 @@ m7.map(p=>{
 }).join("");
 
 /* BUG RAISED */
-const br=[10,15,17];
+const br=[14,25,24];
 const names=["Web","Android","iOS"];
 let total=0, html="";
 
@@ -292,9 +292,9 @@ bf.map(p=>{
 
 /* BUG BREAKDOWN + TOTAL SUM */
 const breakdown = [
- {c:"Component Functionality",t:15,cl:"bad"},
- {c:"UI/UX",t:9,cl:"warn"},
- {c:"CDVR",t:18,cl:""}
+ {c:"Component Functionality",t:26,cl:"bad"},
+ {c:"UI/UX",t:13,cl:"warn"},
+ {c:"CDVR",t:20,cl:""}
 ];
 
 let breakdownTotal = 0;
