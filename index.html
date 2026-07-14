@@ -122,7 +122,7 @@ td {
 <!-- ✅ HEADER FIX -->
 <div class="header">
     <h1>Astro Go PayTV Small Screen Status</h1>
-    <p>Timeline: 02 JULY - 22 JULY </p>
+    <p>Timeline: 02 JULY - 23 JULY </p>
     <p>Environment: Beta-Production</p>
 </div>
 
@@ -212,9 +212,9 @@ td {
 
 /* OVERALL + PROGRESS */
 const overall = [
- {n:"Web",d:53,v:18,b:0,na:12},
- {n:"Android",d:56,v:20,b:3,na:13},
- {n:"iOS",d:56,v:21,b:3,na:13},
+ {n:"Web",d:39,v:14,b:0,na:2},
+ {n:"Android",d:39,v:19,b:1,na:2},
+ {n:"iOS",d:39,v:20,b:1,na:2},
 ];
 
 document.getElementById("overallTable").innerHTML =
@@ -230,16 +230,16 @@ overall.map(p=>{
 
 /* M9 + PROGRESS */
 const m8 = [
- {n:"web",d:48,v:18,b:0},
- {n:"Android",d:51,v:20,b:3},
- {n:"iOS",d:51,v:21,b:3}
+ {n:"web",d:39,v:14,b:0},
+ {n:"Android",d:39,v:19,b:3},
+ {n:"iOS",d:39,v:20,b:3}
 ];
 
 /* M8 + PROGRESS */
 const m7 = [
- {n:"web",d:5,v:0,b:0},
- {n:"Android",d:5,v:0,b:0},
- {n:"iOS",d:5,v:0,b:0}
+ {n:"web",d:0,v:0,b:0},
+ {n:"Android",d:0,v:0,b:0},
+ {n:"iOS",d:0,v:0,b:0}
 ]
   
 /* M9 PROGRESS */
@@ -263,7 +263,7 @@ m7.map(p=>{
 }).join("");
 
 /* BUG RAISED */
-const br=[14,25,24];
+const br=[23,27,31];
 const names=["Web","Android","iOS"];
 let total=0, html="";
 
@@ -292,9 +292,10 @@ bf.map(p=>{
 
 /* BUG BREAKDOWN + TOTAL SUM */
 const breakdown = [
- {c:"Component Functionality",t:26,cl:"bad"},
- {c:"UI/UX",t:13,cl:"warn"},
- {c:"CDVR",t:20,cl:""}
+ {c:"Component Functionality",t:38,cl:"bad"},
+ {c:"UI/UX",t:17,cl:"warn"},
+ {c:"CDVR",t:21,cl:""},
+ {c:"NO COMPONENT",t:0,cl:""}
 ];
 
 let breakdownTotal = 0;
