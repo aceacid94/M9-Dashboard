@@ -263,7 +263,7 @@ m7.map(p=>{
 }).join("");
 
 /* BUG RAISED */
-const br=[34,41,42];
+const br=[38,44,44];
 const names=["Web","Android","iOS"];
 let total=0, html="";
 
@@ -276,9 +276,9 @@ document.getElementById("bugRaisedTable").innerHTML=html;
 
 /* BUG FIX + PROGRESS */
 const bf=[
- {n:"Web",d:38,res:0,done:0,r:0},
- {n:"Android",d:29,res:0,done:0,r:0},
- {n:"iOS",d:19,res:0,done:0,r:0}
+ {n:"Web",d:16,res:13,done:3,r:0},
+ {n:"Android",d:23,res:14,done:8,r:1},
+ {n:"iOS",d:12,res:5,done:7,r:0}
 ];
 
 document.getElementById("bugFixTable").innerHTML =
@@ -292,10 +292,11 @@ bf.map(p=>{
 
 /* BUG BREAKDOWN + TOTAL SUM */
 const breakdown = [
- {c:"Component Functionality",t:49,cl:"bad"},
+ {c:"Component Functionality",t:55,cl:"bad"},
  {c:"UI/UX",t:28,cl:"warn"},
  {c:"CDVR",t:29,cl:""},
  {c:"NO COMPONENT",t:1,cl:""},
+ {c:"PLATFORM SECURITY",t:1,cl:""},
  {c:"AA CSAI",t:1,cl:""}
 ];
 
