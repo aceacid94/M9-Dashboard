@@ -263,7 +263,7 @@ m7.map(p=>{
 }).join("");
 
 /* BUG RAISED */
-const br=[38,44,44];
+const br=[40,45,45];
 const names=["Web","Android","iOS"];
 let total=0, html="";
 
@@ -276,9 +276,9 @@ document.getElementById("bugRaisedTable").innerHTML=html;
 
 /* BUG FIX + PROGRESS */
 const bf=[
- {n:"Web",d:16,res:13,done:3,r:0},
- {n:"Android",d:23,res:14,done:8,r:1},
- {n:"iOS",d:12,res:5,done:7,r:0}
+ {n:"Web",d:16,res:0,done:12,r:4},
+ {n:"Android",d:23,res:7,done:13,r:3},
+ {n:"iOS",d:12,res:1,done:8,r:3}
 ];
 
 document.getElementById("bugFixTable").innerHTML =
@@ -292,7 +292,7 @@ bf.map(p=>{
 
 /* BUG BREAKDOWN + TOTAL SUM */
 const breakdown = [
- {c:"Component Functionality",t:55,cl:"bad"},
+ {c:"Component Functionality",t:59,cl:"bad"},
  {c:"UI/UX",t:28,cl:"warn"},
  {c:"CDVR",t:29,cl:""},
  {c:"NO COMPONENT",t:1,cl:""},
