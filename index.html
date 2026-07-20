@@ -282,13 +282,24 @@ const bf=[
 ];
 
 document.getElementById("bugFixTable").innerHTML =
-bf.map(p=>{
- let pct=(p.done/p.d*100).toFixed(1);
- return `<tr>
- <td>${p.n}</td><td>${p.d}</td><td>${p.res}</td><td>${p.done}</td><td>${p.r}</td>
- <td>${pct}%<div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div></td>
- </tr>`;
+bf.map(p => {
+    let pct = ((p.done + p.r) / p.d * 100).toFixed(1);
+
+    return `<tr>
+        <td>${p.n}</td>
+        <td>${p.d}</td>
+        <td>${p.res}</td>
+        <td>${p.done}</td>
+        <td>${p.r}</td>
+        <td>
+            ${pct}%
+            <div class="progress">
+                <div class="progress-bar" style="width:${pct}%"></div>
+            </div>
+        </td>
+    </tr>`;
 }).join("");
+
 
 /* BUG BREAKDOWN + TOTAL SUM */
 const breakdown = [
